@@ -2,9 +2,11 @@
 
 Follow this in order.
 
-## 0. Get GOG working
+## 0. Get a Google Workspace CLI working
 
-Complete `SETUP-GOG.md` first.
+Choose either `gog` (steipete/gogcli) or `gws` (Google's official Workspace CLI).
+
+Complete `SETUP-GOG.md` or `SETUP-GWS.md` based on your choice.
 
 Do not continue until these all work:
 
@@ -46,9 +48,12 @@ Copy these into `~/.openclaw/workspace/`:
 
 - `workspace/HEARTBEAT.md`
 - `workspace/TOOLS.md`
+- `workspace/WORKSPACE-CLI.md`
 - `workspace/tasks/current.md`
 
 Merge carefully if you already have live files.
+
+Set the `Google Workspace CLI:` value in `WORKSPACE-CLI.md` to `gog` or `gws` based on which CLI you set up in step 0.
 
 ## 4. Add your private workspace files
 

@@ -1,11 +1,15 @@
 ---
 name: executive-assistant
-description: "Perform {{OWNER_NAME}}'s executive-assistant workflow using Google Workspace via gog and Slack via message. Use when handling general inbox triage or inbox clearing for {{ASSISTANT_EMAIL}}, sending short operational email replies, scheduling/rescheduling/canceling meetings, checking {{OWNER_NAME}}'s calendars across his relevant accounts, spotting urgent upcoming events or conflicts, following booking links from Calendly / Google appointment schedules / HubSpot / Acuity / similar schedulers, or running the recurring EA sweep cron. Prefer this skill over business-development for general inbox/calendar work. Do not use it as the primary skill when the task is really about the outreach tracker, lead status, prospect pipeline, or referral-partner outreach. This skill should act like a decisive, high-trust executive assistant: clear low-risk operational work directly, keep scheduling moving, and escalate only when ambiguity, sensitivity, or high stakes require {{OWNER_NAME}}."
+description: "Perform {{OWNER_NAME}}'s executive-assistant workflow using the configured Google Workspace CLI and Slack via message. Use when handling general inbox triage or inbox clearing for {{ASSISTANT_EMAIL}}, sending short operational email replies, scheduling/rescheduling/canceling meetings, checking {{OWNER_NAME}}'s calendars across his relevant accounts, spotting urgent upcoming events or conflicts, following booking links from Calendly / Google appointment schedules / HubSpot / Acuity / similar schedulers, or running the recurring EA sweep cron. Prefer this skill over business-development for general inbox/calendar work. Do not use it as the primary skill when the task is really about the outreach tracker, lead status, prospect pipeline, or referral-partner outreach. This skill should act like a decisive, high-trust executive assistant: clear low-risk operational work directly, keep scheduling moving, and escalate only when ambiguity, sensitivity, or high stakes require {{OWNER_NAME}}."
 ---
 
 # Executive Assistant
 
-Use `gog` for Gmail + Calendar work and Slack DM for {{OWNER_NAME}} updates.
+Use the configured Google Workspace CLI for Gmail + Calendar work and Slack DM for {{OWNER_NAME}} updates.
+
+## CLI tool
+
+Command examples below use `gog`. If `~/.openclaw/workspace/WORKSPACE-CLI.md` says `gws`, translate all `gog` commands using `~/.openclaw/skills/_shared/google-workspace-commands.md` before executing.
 
 ## Gotchas
 
@@ -79,7 +83,7 @@ Relevant calendars to check for conflicts/availability:
 - After the third unanswered follow-up, stop the automatic sequence and surface the thread to {{OWNER_NAME}} if it still matters.
 - Availability checks must look across all relevant visible calendars {{OWNER_NAME}} cares about. A free slot on one calendar alone is never enough to book.
 - Availability checks must include non-meeting unavailability too: out-of-office, travel, offsite, or other blocks that mean {{OWNER_NAME}} should not be booked.
-- When booking through a public scheduler (Calendly, HubSpot, Acuity, etc.), first check the proposed window with `gog calendar events --all` (or equivalent all-calendar view). If calendar visibility is incomplete or uncertain — especially for out-of-office / travel state — do not self-book until you resolve that uncertainty.
+- When booking through a public scheduler (Calendly, HubSpot, Acuity, etc.), first check the proposed window with an all-calendar events query (see CLI tool section above). If calendar visibility is incomplete or uncertain — especially for out-of-office / travel state — do not self-book until you resolve that uncertainty.
 - For ambiguous, legal, financial, reputational, investor, press, or emotionally sensitive items, ask {{OWNER_NAME}} in Slack before replying.
 - If {{OWNER_NAME}} needs to know something, send one crisp Slack DM with the situation, the recommended next step, and any deadline.
 
@@ -195,7 +199,7 @@ For scheduling, rescheduling, cancellation, invite updates, or calendar follow-u
 
 - if the other person provided a booking link, open that link first and inspect the actual offered slots before proposing manual times
 - treat booking links broadly: Calendly, Google appointment schedules, HubSpot, Acuity, Chili Piper, and similar schedulers all count
-- inspect {{OWNER_NAME}}'s calendar directly across all relevant visible calendars (`gog calendar events --all` / all-calendar view), not just one calendar
+- inspect {{OWNER_NAME}}'s calendar directly across all relevant visible calendars (all-calendar events query), not just one calendar
 - specifically account for `{{PERSONAL_EMAIL}}`, `{{SECONDARY_CALENDAR_EMAIL_1}}`, `{{SECONDARY_CALENDAR_EMAIL_2}}`, `{{SECONDARY_CALENDAR_EMAIL_3}}`, the Family calendar, and `{{PRIMARY_WORK_EMAIL}}`
 - treat `{{PRIMARY_WORK_EMAIL}}` as the default calendar for creating general business events, not as the only calendar to check for conflicts
 - if {{OWNER_NAME}} emailed the request from one of his own accounts, default to using that matching calendar for the event unless he said otherwise

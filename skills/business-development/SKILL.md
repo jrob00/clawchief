@@ -1,11 +1,15 @@
 ---
 name: business-development
-description: "Manage {{BUSINESS_NAME}} business-development and outreach-tracking work using Google Workspace via gog. Use when handling prospecting replies, referral-partner outreach, updating the outreach tracker, logging lead status changes, booking or confirming outreach meetings tied to a lead/prospect, or maintaining the operational record of sales/outreach conversations for {{BUSINESS_NAME}}. Prefer this skill over executive-assistant whenever the task touches the outreach tracker, lead status, prospect pipeline, or referral-partner outreach, even if scheduling is involved."
+description: "Manage {{BUSINESS_NAME}} business-development and outreach-tracking work using the configured Google Workspace CLI. Use when handling prospecting replies, referral-partner outreach, updating the outreach tracker, logging lead status changes, booking or confirming outreach meetings tied to a lead/prospect, or maintaining the operational record of sales/outreach conversations for {{BUSINESS_NAME}}. Prefer this skill over executive-assistant whenever the task touches the outreach tracker, lead status, prospect pipeline, or referral-partner outreach, even if scheduling is involved."
 ---
 
 # Business Development
 
 Use this skill for outreach and prospect tracking work. Keep it separate from executive-assistant inbox clearing.
+
+## CLI tool
+
+Command examples below use `gog`. If `~/.openclaw/workspace/WORKSPACE-CLI.md` says `gws`, translate all `gog` commands using `~/.openclaw/skills/_shared/google-workspace-commands.md` before executing.
 
 ## Gotchas
 

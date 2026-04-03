@@ -46,7 +46,9 @@ Quietly prepare today's `## Today` section before {{OWNER_NAME}} wakes up.
 
 ## Calendar workflow
 
-Use `gog` via shell to inspect {{OWNER_NAME}}'s visible calendars before adding meeting tasks.
+Use the configured Google Workspace CLI via shell to inspect {{OWNER_NAME}}'s visible calendars before adding meeting tasks.
+
+Command examples below use `gog`. If `~/.openclaw/workspace/WORKSPACE-CLI.md` says `gws`, translate all `gog` commands using `~/.openclaw/skills/_shared/google-workspace-commands.md` before executing.
 
 Check these calendars when visible:
 - `{{PERSONAL_EMAIL}}`

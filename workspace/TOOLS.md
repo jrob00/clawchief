@@ -44,16 +44,16 @@ Things like:
 - For {{OWNER_NAME}}'s outreach / lead-tracking work, the Google Sheet is the only source of truth.
 - Do not treat local `.md` or `.csv` prospect files as the live outreach list unless {{OWNER_NAME}} explicitly asks for an export or backup.
 - If a lead is added or updated, update the Google Sheet rather than only changing workspace files.
-- On this Mac, prefer the local `gog` CLI for Google Sheets work when available; `{{ASSISTANT_EMAIL}}` is already authenticated with Sheets access.
-- More broadly for Google Workspace tasks (Sheets/Gmail/Calendar/Docs), prefer `gog` on this machine rather than browser automation when `gog` can do the job.
+- On this Mac, prefer the configured Google Workspace CLI (see `WORKSPACE-CLI.md`) for Google Sheets work when available; `{{ASSISTANT_EMAIL}}` is already authenticated with Sheets access.
+- More broadly for Google Workspace tasks (Sheets/Gmail/Calendar/Docs), prefer the configured CLI on this machine rather than browser automation when the CLI can do the job.
 - For LinkedIn investigation / outreach browser work, prefer the OpenClaw-managed browser profile (`openclaw`) now that {{OWNER_NAME}} has logged LinkedIn into it. Treat personal Chrome attach (`profile=user`) as fallback-only when {{OWNER_NAME}} is physically present and explicitly wants reuse of his live browser session.
 
 ## Email / Gmail
 
 - The founder's default work email / cc for chief-of-staff communication is `{{PRIMARY_WORK_EMAIL}}`.
 - Use `{{PERSONAL_EMAIL}}` only for personal matters.
-- For outbound outreach sent via `gog gmail send`, keep emails in plain text unless rich formatting is specifically needed.
-- `gog gmail send` plain text is sent as normal `text/plain`; if a mobile client looks awkward, the fix is usually shorter paragraphs and cleaner bulleting, not HTML.
+- For outbound outreach sent via the workspace CLI, keep emails in plain text unless rich formatting is specifically needed.
+- Plain text is sent as normal `text/plain`; if a mobile client looks awkward, the fix is usually shorter paragraphs and cleaner bulleting, not HTML.
 - For plain-text outreach, prefer:
   - one short sentence per paragraph when possible
   - short bullet lists

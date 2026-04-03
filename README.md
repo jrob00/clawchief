@@ -23,12 +23,13 @@ Use this repo if you want OpenClaw to help run day-to-day operations like:
 
 - `workspace/HEARTBEAT.md`
 - `workspace/TOOLS.md`
+- `workspace/WORKSPACE-CLI.md`
 - `workspace/tasks/current.md`
 
 ### Setup docs
 
 - `INSTALL-WITH-OPENCLAW.md`
-- `SETUP-GOG.md`
+- `SETUP-GOG.md` or `SETUP-GWS.md`
 - `INSTALL-CHECKLIST.md`
 - `CHANNELS.md`
 - `cron/jobs.template.json`
@@ -38,15 +39,15 @@ Use this repo if you want OpenClaw to help run day-to-day operations like:
 This setup expects:
 
 - OpenClaw is already installed
-- `gog` works for Gmail, Calendar, and Sheets
+- a Google Workspace CLI (`gog` or `gws`) works for Gmail, Calendar, and Sheets
 - you are willing to edit placeholders for your own name, email addresses, business, target market, geography, and sheet IDs
 
-If `gog` is not working, stop and fix that first.
+If neither CLI is working, stop and fix that first.
 
 ## Install order
 
 1. Read `INSTALL-WITH-OPENCLAW.md`
-2. Complete `SETUP-GOG.md`
+2. Complete `SETUP-GOG.md` or `SETUP-GWS.md`
 3. Copy the skills into `~/.openclaw/skills/`
 4. Copy the workspace files into `~/.openclaw/workspace/`
 5. Replace placeholders

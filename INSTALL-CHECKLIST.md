@@ -2,9 +2,10 @@
 
 The install is good only if every item below passes.
 
-## GOG
+## Google Workspace CLI
 
-- [ ] `gog auth list` shows the correct operating account
+- [ ] `WORKSPACE-CLI.md` is set to `gog` or `gws`
+- [ ] Auth verification passes (run `gog auth list` or `gws auth status`)
 - [ ] Gmail **message search** works
 - [ ] Calendar list/read works
 - [ ] Sheets metadata read works

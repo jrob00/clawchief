@@ -9,7 +9,7 @@ Primary goals:
 On heartbeat, during normal work hours:
 
 1. Check `{{ASSISTANT_EMAIL}}` for important new mail using **message-level Gmail search**, not thread search.
-   - Prefer `gog gmail messages search ...` over `gog gmail search ...`
+   - Use **message-level** Gmail search, not thread-only search (see `WORKSPACE-CLI.md` for active CLI and `~/.openclaw/skills/_shared/google-workspace-commands.md` for command syntax)
    - This matters because sent-initiated threads can hide inbound replies if you only inspect thread metadata
    - If a partner / referral outreach reply comes in during this sweep, update the live outreach Google Sheet before treating that email as handled
    - Especially look for:
