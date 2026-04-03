@@ -2,10 +2,9 @@
 
 The install is good only if every item below passes.
 
-## Google Workspace CLI
+## GWS
 
-- [ ] `WORKSPACE-CLI.md` is set to `gog` or `gws`
-- [ ] Auth verification passes (run `gog auth list` or `gws auth status`)
+- [ ] `gws auth status` shows the correct operating account
 - [ ] Gmail **message search** works
 - [ ] Calendar list/read works
 - [ ] Sheets metadata read works
@@ -21,6 +20,7 @@ The install is good only if every item below passes.
 
 - [ ] `HEARTBEAT.md` is installed
 - [ ] `TOOLS.md` is installed
+- [ ] `WORKSPACE-CLI.md` is installed
 - [ ] `tasks/current.md` is installed
 - [ ] private workspace files have been authored if your setup depends on them
 - [ ] all placeholders are replaced

@@ -1,15 +1,11 @@
 ---
 name: business-development
-description: "Manage {{BUSINESS_NAME}} business-development and outreach-tracking work using the configured Google Workspace CLI. Use when handling prospecting replies, referral-partner outreach, updating the outreach tracker, logging lead status changes, booking or confirming outreach meetings tied to a lead/prospect, or maintaining the operational record of sales/outreach conversations for {{BUSINESS_NAME}}. Prefer this skill over executive-assistant whenever the task touches the outreach tracker, lead status, prospect pipeline, or referral-partner outreach, even if scheduling is involved."
+description: "Manage {{BUSINESS_NAME}} business-development and outreach-tracking work using gws. Use when handling prospecting replies, referral-partner outreach, updating the outreach tracker, logging lead status changes, booking or confirming outreach meetings tied to a lead/prospect, or maintaining the operational record of sales/outreach conversations for {{BUSINESS_NAME}}. Prefer this skill over executive-assistant whenever the task touches the outreach tracker, lead status, prospect pipeline, or referral-partner outreach, even if scheduling is involved."
 ---
 
 # Business Development
 
 Use this skill for outreach and prospect tracking work. Keep it separate from executive-assistant inbox clearing.
-
-## CLI tool
-
-Command examples below use `gog`. If `~/.openclaw/workspace/WORKSPACE-CLI.md` says `gws`, translate all `gog` commands using `~/.openclaw/skills/_shared/google-workspace-commands.md` before executing.
 
 ## Gotchas
 
@@ -105,9 +101,9 @@ Default note patterns:
 Useful message-level Gmail searches:
 
 ```bash
-gog gmail messages search 'subject:"Potential partnership" newer_than:30d' -a {{ASSISTANT_EMAIL}} --all --include-body --json --results-only
+gws gmail +triage --query 'subject:"Potential partnership" newer_than:30d' --max-results 50
 
-gog gmail messages search 'subject:"Saw your work" newer_than:30d' -a {{ASSISTANT_EMAIL}} --all --include-body --json --results-only
+gws gmail +triage --query 'subject:"Saw your work" newer_than:30d' --max-results 50
 ```
 
 If {{OWNER_NAME}} asks to "process the partner replies" or says emails have come in from partners, interpret that as:
@@ -128,16 +124,16 @@ If {{OWNER_NAME}} asks to "process the partner replies" or says emails have come
 For this sheet size, inspect the current lead table and header row directly before writing:
 
 ```bash
-gog sheets get {{GOOGLE_SHEET_ID}} 'Leads!A:N' -a {{ASSISTANT_EMAIL}} --json --results-only
+gws sheets +read --spreadsheet-id '{{GOOGLE_SHEET_ID}}' --range 'Leads!A:N'
 ```
 
 Use `--values-json` for reliable multi-column writes. Current expected column order is:
 `Name | Role | Website | Email | Location | Email sent | LI connect sent | LI connect accpeted | Meeting booked | LinkedIn | {{OWNER_NAME}}'s Notes | {{ASSISTANT_NAME}}'s Notes | Date added | Partner link`
 
 ```bash
-gog sheets update {{GOOGLE_SHEET_ID}} 'Leads!A13:N13' --values-json='[["Name","Role","https://example.com","name@example.com","{{TARGET_GEOGRAPHY}}","Yes","Yes","No","No","https://www.linkedin.com/in/example/","","2026-03-25: sent email. 2026-03-25: sent LinkedIn connection request with note.","2026-03-25",""]]' -a {{ASSISTANT_EMAIL}} --json --results-only
+gws sheets spreadsheets.values.update --params '{"spreadsheetId":"{{GOOGLE_SHEET_ID}}","range":"Leads!A13:N13","valueInputOption":"USER_ENTERED"}' --json '{"values":[["Name","Role","https://example.com","name@example.com","{{TARGET_GEOGRAPHY}}","Yes","Yes","No","No","https://www.linkedin.com/in/example/","","2026-03-25: sent email. 2026-03-25: sent LinkedIn connection request with note.","2026-03-25",""]]}'
 
-gog sheets append {{GOOGLE_SHEET_ID}} 'Leads!A:N' --values-json='[["Name","Role","https://example.com","name@example.com","{{TARGET_GEOGRAPHY}}","No","No","No","No","https://www.linkedin.com/in/example/","","2026-03-25: verified website + LinkedIn.","2026-03-25",""]]' -a {{ASSISTANT_EMAIL}} --json --results-only
+gws sheets +append --spreadsheet-id '{{GOOGLE_SHEET_ID}}' --range 'Leads!A:N' --values '[["Name","Role","https://example.com","name@example.com","{{TARGET_GEOGRAPHY}}","No","No","No","No","https://www.linkedin.com/in/example/","","2026-03-25: verified website + LinkedIn.","2026-03-25",""]]'
 ```
 
 ## Default conventions

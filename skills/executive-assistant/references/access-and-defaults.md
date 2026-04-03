@@ -20,10 +20,10 @@ Default calendar rule:
 
 ## Calendars to check for {{OWNER_NAME}} availability
 
-Verify live state with the configured CLI (see `~/.openclaw/workspace/WORKSPACE-CLI.md`):
+Verify live state with:
 
 ```bash
-gog calendar calendars -a {{ASSISTANT_EMAIL}} --json --results-only
+gws calendar calendarList.list
 ```
 
 Minimum calendar set to care about when checking availability or conflicts:
@@ -46,7 +46,7 @@ Known currently visible state should be validated live. If one of the calendars 
 ## Calendar rules
 
 - When {{OWNER_NAME}} is an attendee, do not ask {{OWNER_NAME}} if he is free if you can inspect his calendar.
-- Availability checks must use an all-calendar view first (e.g. `gog calendar events --all` or the equivalent `gws` command), not only `{{PRIMARY_WORK_EMAIL}}`.
+- Availability checks must use an all-calendar view first (`gws calendar +agenda` or per-calendar events queries), not only `{{PRIMARY_WORK_EMAIL}}`.
 - For public booking links and self-serve schedulers, do not book a time unless it is clear across all visible calendars.
 - Default meeting duration: 30 minutes unless context says otherwise.
 - Default calendar for general business meetings: `{{PRIMARY_WORK_EMAIL}}`

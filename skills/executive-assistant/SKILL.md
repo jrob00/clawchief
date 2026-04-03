@@ -1,15 +1,11 @@
 ---
 name: executive-assistant
-description: "Perform {{OWNER_NAME}}'s executive-assistant workflow using the configured Google Workspace CLI and Slack via message. Use when handling general inbox triage or inbox clearing for {{ASSISTANT_EMAIL}}, sending short operational email replies, scheduling/rescheduling/canceling meetings, checking {{OWNER_NAME}}'s calendars across his relevant accounts, spotting urgent upcoming events or conflicts, following booking links from Calendly / Google appointment schedules / HubSpot / Acuity / similar schedulers, or running the recurring EA sweep cron. Prefer this skill over business-development for general inbox/calendar work. Do not use it as the primary skill when the task is really about the outreach tracker, lead status, prospect pipeline, or referral-partner outreach. This skill should act like a decisive, high-trust executive assistant: clear low-risk operational work directly, keep scheduling moving, and escalate only when ambiguity, sensitivity, or high stakes require {{OWNER_NAME}}."
+description: "Perform {{OWNER_NAME}}'s executive-assistant workflow using gws and Slack via message. Use when handling general inbox triage or inbox clearing for {{ASSISTANT_EMAIL}}, sending short operational email replies, scheduling/rescheduling/canceling meetings, checking {{OWNER_NAME}}'s calendars across his relevant accounts, spotting urgent upcoming events or conflicts, following booking links from Calendly / Google appointment schedules / HubSpot / Acuity / similar schedulers, or running the recurring EA sweep cron. Prefer this skill over business-development for general inbox/calendar work. Do not use it as the primary skill when the task is really about the outreach tracker, lead status, prospect pipeline, or referral-partner outreach. This skill should act like a decisive, high-trust executive assistant: clear low-risk operational work directly, keep scheduling moving, and escalate only when ambiguity, sensitivity, or high stakes require {{OWNER_NAME}}."
 ---
 
 # Executive Assistant
 
-Use the configured Google Workspace CLI for Gmail + Calendar work and Slack DM for {{OWNER_NAME}} updates.
-
-## CLI tool
-
-Command examples below use `gog`. If `~/.openclaw/workspace/WORKSPACE-CLI.md` says `gws`, translate all `gog` commands using `~/.openclaw/skills/_shared/google-workspace-commands.md` before executing.
+Use `gws` for Gmail + Calendar work and Slack DM for {{OWNER_NAME}} updates.
 
 ## Gotchas
 
@@ -146,9 +142,9 @@ Start narrow and expand only if needed.
 Common starting queries:
 
 ```bash
-gog gmail messages search -a {{ASSISTANT_EMAIL}} 'in:inbox newer_than:3d (is:unread OR is:important)' --max=10 --json --results-only
-gog gmail messages search -a {{ASSISTANT_EMAIL}} 'in:inbox newer_than:7d' --max=15 --json --results-only
-gog gmail messages search -a {{ASSISTANT_EMAIL}} 'in:sent newer_than:14d' --max=25 --json --results-only
+gws gmail +triage --query 'in:inbox newer_than:3d (is:unread OR is:important)' --max-results 10
+gws gmail +triage --query 'in:inbox newer_than:7d' --max-results 15
+gws gmail +triage --query 'in:sent newer_than:14d' --max-results 25
 ```
 
 Also do a sent-mail follow-up sweep for threads where {{ASSISTANT_NAME}} sent the last substantive message and is still waiting on the other side. Use the default cadence unless {{OWNER_NAME}} overrides it:
@@ -162,7 +158,7 @@ After the third unanswered follow-up, stop the automatic sequence and surface th
 Do not fetch every message body. Pull full content only for messages that look actionable.
 
 ```bash
-gog gmail get -a {{ASSISTANT_EMAIL}} MESSAGE_ID --json --results-only
+gws gmail +read --message-id MESSAGE_ID
 ```
 
 ### 2) Inspect full thread context before classifying
@@ -212,10 +208,10 @@ For scheduling, rescheduling, cancellation, invite updates, or calendar follow-u
 Useful commands:
 
 ```bash
-gog calendar calendars -a {{ASSISTANT_EMAIL}} --json --results-only
-gog calendar events --all -a {{ASSISTANT_EMAIL}} --days=2 --max=50 --json --results-only
-gog calendar create {{PRIMARY_WORK_EMAIL}} -a {{ASSISTANT_EMAIL}} --summary='TITLE' --from='RFC3339' --to='RFC3339' --attendees='a@example.com,b@example.com' --description='CONTEXT' --with-meet --send-updates all
-gog calendar update {{PRIMARY_WORK_EMAIL}} EVENT_ID -a {{ASSISTANT_EMAIL}} --from='RFC3339' --to='RFC3339' --send-updates all
+gws calendar calendarList.list
+gws calendar +agenda --days 2 --max-results 50
+gws calendar +insert --calendar-id '{{PRIMARY_WORK_EMAIL}}' --summary 'TITLE' --start 'RFC3339' --end 'RFC3339' --attendees 'a@example.com,b@example.com' --description 'CONTEXT' --add-meet --send-updates all
+gws calendar events.patch --params '{"calendarId":"{{PRIMARY_WORK_EMAIL}}","eventId":"EVENT_ID","sendUpdates":"all"}' --json '{"start":{"dateTime":"RFC3339"},"end":{"dateTime":"RFC3339"}}'
 ```
 
 ### 4) Send concise replies for clearable email
@@ -225,13 +221,13 @@ Use short, plain-text replies. Prefer `--body-file` for multi-line messages.
 For existing coordination threads, prefer replying in-thread and preserving recipients. {{OWNER_NAME}}'s work email should stay copied on work threads unless he explicitly says otherwise:
 
 ```bash
-gog gmail send -a {{ASSISTANT_EMAIL}} --reply-to-message-id=MESSAGE_ID --reply-all --cc='{{PRIMARY_WORK_EMAIL}}' --subject='RE: SUBJECT' --body-file=/tmp/reply.txt
+gws gmail +reply --message-id MESSAGE_ID --reply-all --cc '{{PRIMARY_WORK_EMAIL}}' --body-file /tmp/reply.txt
 ```
 
 Only start a fresh recipient list when this is genuinely a new outbound work message, and cc {{OWNER_NAME}}'s work email by default:
 
 ```bash
-gog gmail send -a {{ASSISTANT_EMAIL}} --to='person@example.com' --cc='{{PRIMARY_WORK_EMAIL}}' --subject='SUBJECT' --body-file=/tmp/reply.txt
+gws gmail +send --to 'person@example.com' --cc '{{PRIMARY_WORK_EMAIL}}' --subject 'SUBJECT' --body-file /tmp/reply.txt
 ```
 
 ### 5) Clean up inbox state after action
@@ -245,12 +241,12 @@ After a message is handled:
 Useful commands:
 
 ```bash
-gog gmail mark-read -a {{ASSISTANT_EMAIL}} MESSAGE_ID
-gog gmail archive -a {{ASSISTANT_EMAIL}} MESSAGE_ID
-gog gmail messages modify -a {{ASSISTANT_EMAIL}} MESSAGE_ID --remove=UNREAD,INBOX
+gws gmail users.messages.modify --params '{"userId":"me","id":"MESSAGE_ID"}' --json '{"removeLabelIds":["UNREAD"]}'
+gws gmail users.messages.modify --params '{"userId":"me","id":"MESSAGE_ID"}' --json '{"removeLabelIds":["INBOX"]}'
+gws gmail users.messages.modify --params '{"userId":"me","id":"MESSAGE_ID"}' --json '{"removeLabelIds":["UNREAD","INBOX"]}'
 ```
 
-Prefer `mark-read` + `archive` for clarity.
+Prefer separate mark-read + archive calls for clarity, or combine into one modify call.
 
 ### 6) Sweep the calendar every run
 

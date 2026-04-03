@@ -46,9 +46,7 @@ Quietly prepare today's `## Today` section before {{OWNER_NAME}} wakes up.
 
 ## Calendar workflow
 
-Use the configured Google Workspace CLI via shell to inspect {{OWNER_NAME}}'s visible calendars before adding meeting tasks.
-
-Command examples below use `gog`. If `~/.openclaw/workspace/WORKSPACE-CLI.md` says `gws`, translate all `gog` commands using `~/.openclaw/skills/_shared/google-workspace-commands.md` before executing.
+Use `gws` via shell to inspect {{OWNER_NAME}}'s visible calendars before adding meeting tasks.
 
 Check these calendars when visible:
 - `{{PERSONAL_EMAIL}}`
@@ -63,7 +61,7 @@ Only add calendar items that {{OWNER_NAME}} himself is expected to attend.
 Useful shell pattern:
 
 ```bash
-gog calendar events --all -a {{ASSISTANT_EMAIL}} --days=1 --max=100 --json --results-only
+gws calendar +agenda --days 1 --max-results 100
 ```
 
 ## Task text rules

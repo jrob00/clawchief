@@ -2,8 +2,6 @@
 
 This is a hard prerequisite.
 
-`gws` is Google's official Workspace CLI. It dynamically discovers Google APIs at runtime and includes built-in agent skills for common operations.
-
 ## 1. Install GWS
 
 Pick one method:
@@ -36,19 +34,24 @@ This creates a GCP project, enables APIs, and opens a browser for OAuth consent 
 
 **Option B: Use an existing GCP project**
 
-If you already have a GCP project with the required APIs enabled (Gmail, Calendar, Sheets, Drive, Docs, People), use:
+If you already have a GCP project, create or choose a project in Google Cloud Console, then:
+
+1. Open **APIs & Services**
+2. Enable the APIs you need:
+   - Gmail API
+   - Google Calendar API
+   - Google Sheets API
+   - Google Drive API
+   - Google Docs API
+   - People API
+3. Configure the **OAuth consent screen** if prompted
+4. Add the operating Google account as a test user if required
+
+Then authenticate:
 
 ```bash
 gws auth login
 ```
-
-Required APIs (same as `SETUP-GOG.md`):
-- Gmail API
-- Google Calendar API
-- Google Sheets API
-- Google Drive API
-- Google Docs API
-- People API
 
 ## 3. Verify auth status
 
