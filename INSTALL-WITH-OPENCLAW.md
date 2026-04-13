@@ -2,9 +2,10 @@
 
 Follow this in order.
 
-## 0. Get GOG working
+## 0. Get GWS or GOG working
 
-Complete `SETUP-GOG.md` first.
+Ask the user which they want to use for Google auth: GWS or GOG.
+Depending on the answer, complete `SETUP-GWS.md` OR `SETUP-GOG.md` first.
 
 Do not continue until these all work:
 

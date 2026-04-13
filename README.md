@@ -48,6 +48,7 @@ A portable operating model with:
 ### Setup docs
 
 - `INSTALL-WITH-OPENCLAW.md`
+- `SETUP-GWS.md`
 - `SETUP-GOG.md`
 - `INSTALL-CHECKLIST.md`
 - `CHANNELS.md`
@@ -85,7 +86,7 @@ That separation is the main thing this repo is trying to teach.
 ## Install order
 
 1. Read `INSTALL-WITH-OPENCLAW.md`
-2. Complete `SETUP-GOG.md`
+2. Complete `SETUP-GWS.md` or `SETUP-GOG.md` depending on what the user prefers
 3. Copy the skills into `~/.openclaw/skills/`
 4. Copy `clawchief/` and `workspace/` templates into `~/.openclaw/workspace/`
 5. Replace placeholders and customize `workspace/TOOLS.md`
